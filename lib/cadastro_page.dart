@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({super.key});
@@ -158,9 +161,36 @@ class _CadastroPageState extends State<CadastroPage> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  cadastro();
+                },
+                child: Text('Cadastrar')),
           ],
         ),
       ),
     );
+  }
+
+  cadastro() async {
+    var url = Uri.https('estudeapi.com.br', 'cadastro/');
+    Map<String, dynamic> body = {
+      'email': _emailController.text.trim(),
+      'senha': _senhaController.text.trim(),
+      'csenha': _csenhaController.text.trim(),
+      'nome': _nomeController.text.trim(),
+      'sobrenome': _sobrenomeController.text.trim(),
+    };
+    var response = await http.post(url, body: body);
+    if (response.statusCode == 201) {
+    } else {
+      var errors = jsonDecode((response.body));
+      var snackBar = SnackBar(
+          content: Text(errors['email'][0]), backgroundColor: Colors.redAccent);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 }
