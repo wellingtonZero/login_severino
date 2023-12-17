@@ -186,10 +186,13 @@ class _CadastroPageState extends State<CadastroPage> {
     };
     var response = await http.post(url, body: body);
     if (response.statusCode == 201) {
+      Navigator.pop(context);
     } else {
       var errors = jsonDecode((response.body));
       var snackBar = SnackBar(
-          content: Text(errors['email'][0]), backgroundColor: Colors.redAccent);
+        content: Text(errors['email'][0]),
+        backgroundColor: Colors.redAccent,
+      );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
