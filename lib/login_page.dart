@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             const SizedBox(height: 16),
-            ElevatedButton(onPressed: () {}, child: Text("Entrar")),
+            ElevatedButton(onPressed: () {}, child: const Text("Entrar")),
             TextButton(
               onPressed: () {
                 Navigator.push(
