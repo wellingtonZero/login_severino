@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -190,6 +189,7 @@ class _CadastroPageState extends State<CadastroPage> {
     } else {
       var errors = jsonDecode((response.body));
       var snackBar = SnackBar(
+        //content: Text(errors?['email']?[0] ?? 'Erro desconhecido'),
         content: Text(errors['email'][0]),
         backgroundColor: Colors.redAccent,
       );
